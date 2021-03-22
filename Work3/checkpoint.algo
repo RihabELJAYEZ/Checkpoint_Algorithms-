@@ -1,49 +1,38 @@
 ALGORITHM character_test
 VAR
     p : STRING;
-    nbr_c,nbr_w,nbr_v : INTEGER;
+    nbr_c,nbr_w,nbr_v,nb : INTEGER;
 CONST
     T_V =["a","e","i","o","u","y"];
     
 BEGIN
+    nb := 0; // length
     REPEAT
-    Write("please enter a sentence, which ends with a point !")
-    Read(p)
-    UNTIL (p[length(p)]==".")
+    Write("please enter a sentence, which ends with a point !");
+    Read(p);
+    nb := p.length; 
+    UNTIL (p[nb]=".")
 
-    //The length of the sentence
-    nbr_c :=0;
-    FOR i FROM 1 TO length(p) STEP step DO
-    IF (p[i] != "." and p[i] != " " ) THEN 
-    nbr_c := nbr_c + 1;
-    END_IF
-    END_FOR
-    Write(nbr_c)
-
-    //The number of words in the sentence
-    nbr_w :=0;
-    FOR i FROM 1 TO length(p) STEP step DO
-    WHILE (p[i] != ".") DO
-        IF (p[i+1] != " ") THEN 
-            nbr_w := nbr_w + 1;
-        END_IF
-    END_WHILE
-    END_FOR
-    Write(nbr_w)
-
-    //The number of vowels in the sentence.
+    //The number of words & voyelle in the sentence
+    nbr_w :=1;
     nbr_v := 0;
-    FOR i FROM 1 TO length(p) DO
-        WHILE (p[i] != ".") DO
+    FOR i FROM 1 TO nb DO
+        WHILE (p[i] <> ".") DO
+            IF (p[i+1] = " ") THEN 
+                nbr_w := nbr_w + 1;
+            END_IF
             FOR j FROM 1 TO 6 STEP step  DO
-                IF (p[i] == T_V[j]) THEN 
-                nbr_v := nbr_v + 1;
+                IF (p[i] = T_V[j]) THEN 
+                    nbr_v := nbr_v + 1;
                 END_IF
             END_FOR
+        
         END_WHILE
     END_FOR
-    Write(nbr_v
-    )
+
+    Write("The length of the sentence =",nb)
+    Write("The number of words in the sentence =",nbr_w)
+    Write("The number of vowels in the sentence =",nbr_v)
     
 
 END
